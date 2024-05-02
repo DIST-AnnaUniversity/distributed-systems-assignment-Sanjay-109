@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript client</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Content Comsumption</h1>
+    </div>
+    <script>
+      var count = 1;
+      async  function getting() {
+        try {
+            var res = await fetch("http://127.0.0.1:5000")
+            res = await res.json()
+            res = res.news[0]
+            const h1 = document.createElement("h2");
+            h1.textContent = count + " . " + res;
+            count++
+            document.getElementById("container").appendChild(h1)
+        } catch (err) {
+            console.log("error in fetching : "+ err.message)
+        }
+      }
+      for (var i = 0; i < 3; i++) {
+        getting();
+      }
+    </script>
+</body>
+</html>
